@@ -17,6 +17,7 @@ class Main_Controller {
 	private $password_reset_form;
 	private $taxonomy_wayfinder;
 	private $shortcode_wayfinder;
+	private $ajax_wayfinder;
 
 	/**
 	 * Constructor
@@ -29,13 +30,15 @@ class Main_Controller {
 		Assets_Controller $assets_controller,
 		Admin_Notices $admin_notices,
 		Taxonomy_Wayfinder $taxonomy_wayfinder,
-		Shortcode_Wayfinder $shortcode_wayfinder
+		Shortcode_Wayfinder $shortcode_wayfinder,
+		AJAX_Wayfinder $ajax_wayfinder
 	) {
 		$this->plugin_options      = $plugin_options;
 		$this->assets_controller   = $assets_controller;
 		$this->admin_notices       = $admin_notices;
 		$this->taxonomy_wayfinder  = $taxonomy_wayfinder;
 		$this->shortcode_wayfinder = $shortcode_wayfinder;
+		$this->ajax_wayfinder      = $ajax_wayfinder;
 	}
 
 	/**
@@ -48,5 +51,6 @@ class Main_Controller {
 		$this->admin_notices->run();
 		$this->taxonomy_wayfinder->run();
 		$this->shortcode_wayfinder->run();
+		$this->ajax_wayfinder->run();
 	}
 }

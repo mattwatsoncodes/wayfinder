@@ -1,0 +1,13 @@
+.wayfinder-search-box {
+	padding: 2em;
+	background-color: #efefef;
+	margin-bottom: 2em;
+}
+
+.wayfinder-search-box .select2-selection {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 0px;
+	border-bottom: 1px dashed #aaa;
+}

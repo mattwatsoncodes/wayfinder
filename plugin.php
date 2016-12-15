@@ -28,6 +28,7 @@ require_once 'php/class-assets-controller.php';
 require_once 'php/class-admin-notices.php';
 require_once 'php/class-taxonomy-wayfinder.php';
 require_once 'php/class-shortcode-wayfinder.php';
+require_once 'php/class-ajax-wayfinder.php';
 require_once 'php/class-main-controller.php';
 
 // Use Namespaces
@@ -37,6 +38,7 @@ use mkdo\wayfinder\Assets_Controller;
 use mkdo\wayfinder\Admin_Notices;
 use mkdo\wayfinder\Taxonomy_Wayfinder;
 use mkdo\wayfinder\Shortcode_Wayfinder;
+use mkdo\wayfinder\AJAX_Wayfinder;
 use mkdo\wayfinder\Main_Controller;
 
 // Initialize Classes
@@ -46,12 +48,14 @@ $assets_controller        = new Assets_Controller( $plugin_options );
 $admin_notices            = new Admin_Notices( $plugin_options );
 $taxonomy_wayfinder       = new Taxonomy_Wayfinder( $plugin_options );
 $shortcode_wayfinder      = new Shortcode_Wayfinder( $plugin_options );
+$ajax_wayfinder           = new AJAX_Wayfinder();
 $main_controller          = new Main_Controller(
 	$plugin_options,
 	$assets_controller,
 	$admin_notices,
 	$taxonomy_wayfinder,
-	$shortcode_wayfinder
+	$shortcode_wayfinder,
+	$ajax_wayfinder
 );
 
 // Run the Plugin

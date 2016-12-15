@@ -70,6 +70,12 @@ class Assets_Controller {
 		if ( in_array( 'plugin_js', $enqueued_assets ) ) {
 			$plugin_js_url  = plugins_url( 'js/plugin.js', MKDO_WF_ROOT );
 			wp_enqueue_script( MKDO_WF_TEXT_DOMAIN, $plugin_js_url, array( 'jquery' ), MKDO_WF_VERSION, true );
+
+			$ajax_nonce = wp_create_nonce( 'mkdo-wf-ajax-nonce' );
+			$ajax_url   = admin_url( 'admin-ajax.php' );
+
+			wp_localize_script( MKDO_WF_TEXT_DOMAIN, 'ajax_url', $ajax_url );
+			wp_localize_script( MKDO_WF_TEXT_DOMAIN, 'ajax_nonce', $ajax_nonce );
 		}
 	}
 
@@ -81,7 +87,7 @@ class Assets_Controller {
 		$enqueued_assets = get_option(
 			$this->options_prefix . 'enqueue_back_end_assets',
 			array(
-				'plugin_admin_css',
+				//'plugin_admin_css',
 				'plugin_admin_editor_css',
 				'plugin_admin_js',
 			)

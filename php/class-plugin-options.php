@@ -54,8 +54,9 @@ class Plugin_Options {
 		// Register Settings
 		register_setting( $settings . '_group', $this->options_prefix . 'search_box_prefix' );
 		register_setting( $settings . '_group', $this->options_prefix . 'search_box_join' );
+		register_setting( $settings . '_group', $this->options_prefix . 'search_box_action' );
 		register_setting( $settings . '_group', $this->options_prefix . 'search_box_suffix' );
-		//register_setting( $settings . '_group', $this->options_prefix . 'enqueue_front_end_assets' );
+		register_setting( $settings . '_group', $this->options_prefix . 'enqueue_front_end_assets' );
 		register_setting( $settings . '_group', $this->options_prefix . 'enqueue_back_end_assets' );
 		register_setting( $settings . '_group', $this->options_prefix . 'post_types' );
 
@@ -64,12 +65,13 @@ class Plugin_Options {
 		add_settings_section( $section, __( 'Search Box', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_section_search_box' ), $settings );
 		add_settings_field( $this->options_prefix . 'field_search_box_prefix', __( 'Prefix:', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_field_search_box_prefix' ), $settings, $section );
 		add_settings_field( $this->options_prefix . 'field_search_box_join', __( 'Join:', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_field_search_box_join' ), $settings, $section );
+		add_settings_field( $this->options_prefix . 'field_search_box_action', __( 'Action (Dropdown):', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_field_search_box_action' ), $settings, $section );
 		add_settings_field( $this->options_prefix . 'field_search_box_suffix', __( 'Suffix:', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_field_search_box_suffix' ), $settings, $section );
 
 		// Add section and fields for Asset Enqueing
 		$section = $this->options_prefix . 'section_enqueue_assets';
 		add_settings_section( $section, __( 'Enqueue Assets', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_section_enqueue_assets' ), $settings );
-		//add_settings_field( $this->options_prefix . 'field_enqueue_front_end_assets', __( 'Enqueue Front End Assets:', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_field_enqueue_front_end_assets' ), $settings, $section );
+		add_settings_field( $this->options_prefix . 'field_enqueue_front_end_assets', __( 'Enqueue Front End Assets:', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_field_enqueue_front_end_assets' ), $settings, $section );
 		add_settings_field( $this->options_prefix . 'field_enqueue_back_end_assets', __( 'Enqueue Back End Assets:', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_field_enqueue_back_end_assets' ), $settings, $section );
 
 		// Add section for choosing post types
@@ -119,6 +121,24 @@ class Plugin_Options {
 				<?php esc_html_e( 'Join:', MKDO_WF_TEXT_DOMAIN );?>
 			</label>
 			<input type="text" id="<?php echo $this->options_prefix;?>search_box_join" name="<?php echo $this->options_prefix;?>search_box_join" value="<?php echo esc_attr( $value );?>" />
+		</div>
+		<?php
+	}
+
+	// Render the Search Box Action
+	public function render_field_search_box_action() {
+
+		$value = get_option(
+			$this->options_prefix . 'search_box_action',
+			__( 'I want to...', MKDO_WF_TEXT_DOMAIN )
+		);
+
+		?>
+		<div class="field field-checkbox field-input">
+			<label for="<?php echo $this->options_prefix;?>search_box_action" class="screen-reader-text">
+				<?php esc_html_e( 'Action (Dropdown):', MKDO_WF_TEXT_DOMAIN );?>
+			</label>
+			<input type="text" id="<?php echo $this->options_prefix;?>search_box_action" name="<?php echo $this->options_prefix;?>search_box_action" value="<?php echo esc_attr( $value );?>" />
 		</div>
 		<?php
 	}
@@ -207,7 +227,7 @@ class Plugin_Options {
 		$enqueued_assets = get_option(
 			$this->options_prefix . 'enqueue_back_end_assets',
 			array(
-				'plugin_admin_css',
+				//'plugin_admin_css',
 				'plugin_admin_editor_css',
 				'plugin_admin_js',
 			)
