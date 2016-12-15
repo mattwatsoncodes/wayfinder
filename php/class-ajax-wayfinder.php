@@ -9,10 +9,14 @@ namespace mkdo\wayfinder;
  */
 class AJAX_Wayfinder {
 
+	private $options_prefix;
+
 	/**
 	 * Constructor
 	 */
-	public function __construct() {}
+	function __construct( Plugin_Options $plugin_options ) {
+		$this->options_prefix = $plugin_options->get_options_prefix();
+	}
 
 	/**
 	 * Do Work
@@ -43,7 +47,7 @@ class AJAX_Wayfinder {
 		$type_ids = get_terms(
 			array(
 				'taxonomy'   => 'wayfinder',
-			    'hide_empty' => false,
+			    'hide_empty' => true,
 				'parent'     => 0,
 				'fields'     => 'ids',
 			)
@@ -52,7 +56,7 @@ class AJAX_Wayfinder {
 		$actions = get_terms(
 			array(
 				'taxonomy'   => 'wayfinder',
-				'hide_empty' => false,
+				'hide_empty' => true,
 				'exclude'    => $type_ids,
 				'parent'     => $parent_id,
 			)

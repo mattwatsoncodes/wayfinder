@@ -48,7 +48,7 @@ $assets_controller        = new Assets_Controller( $plugin_options );
 $admin_notices            = new Admin_Notices( $plugin_options );
 $taxonomy_wayfinder       = new Taxonomy_Wayfinder( $plugin_options );
 $shortcode_wayfinder      = new Shortcode_Wayfinder( $plugin_options );
-$ajax_wayfinder           = new AJAX_Wayfinder();
+$ajax_wayfinder           = new AJAX_Wayfinder( $plugin_options );
 $main_controller          = new Main_Controller(
 	$plugin_options,
 	$assets_controller,

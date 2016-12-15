@@ -80,28 +80,19 @@ class Shortcode_Wayfinder {
 
 		$join = get_option(
 			$this->options_prefix . 'search_box_join',
-			__( 'I', MKDO_WF_TEXT_DOMAIN )
+			__( 'and', MKDO_WF_TEXT_DOMAIN )
 		);
 
 		$suffix = get_option(
 			$this->options_prefix . 'search_box_suffix',
-			__( 'I', MKDO_WF_TEXT_DOMAIN )
+			__( '.', MKDO_WF_TEXT_DOMAIN )
 		);
 
 		$types = get_terms(
 			array(
 				'taxonomy'   => 'wayfinder',
-			    'hide_empty' => false,
+			    'hide_empty' => true,
 				'parent'     => 0,
-			)
-		);
-
-		$type_ids = get_terms(
-			array(
-				'taxonomy'   => 'wayfinder',
-			    'hide_empty' => false,
-				'parent'     => 0,
-				'fields'     => 'ids',
 			)
 		);
 
@@ -157,8 +148,8 @@ class Shortcode_Wayfinder {
 		}
 
 		$term_id  = intval( $_POST['wayfinder-search-box__action'] );
-		$location = get_term_link( $term_id );
-		wp_safe_redirect( $location, 200 );
+		$location = get_term_link( $term_id, 'wayfinder' );
+		wp_safe_redirect( $location );
 		exit;
 	}
 }

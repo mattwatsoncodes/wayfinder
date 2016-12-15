@@ -94,7 +94,7 @@ class Taxonomy_Wayfinder {
 		$value = '';
 	    ?>
 		<div class="form-field">
-	        <label for="mkdo_wf_show_in_search_box_as"><?php _e( 'Show in Search Box as:', 'hartley-botanic' ); ?></label>
+	        <label for="mkdo_wf_show_in_search_box_as"><?php _e( 'Show in Search Box as:', MKDO_WF_TEXT_DOMAIN ); ?></label>
 			<input type="text" name="mkdo_wf_show_in_search_box_as" id="mkdo_wf_show_in_search_box_as" value="<?php echo esc_attr( $value );?>"/>
 			<p style="clear:both;"><?php _e( 'Enter the title as you wish it to be shown in the search box', MKDO_WF_TEXT_DOMAIN ); ?></p>
 	    </div>
@@ -109,7 +109,7 @@ class Taxonomy_Wayfinder {
 		?>
 		<tr class="form-field">
 	        <th scope="row">
-				<label for="mkdo_wf_show_in_search_box_as"><?php _e( 'Colour', 'hartley-botanic' ); ?></label>
+				<label for="mkdo_wf_show_in_search_box_as"><?php _e( 'Show in Search Box as:', MKDO_WF_TEXT_DOMAIN ); ?></label>
 			</th>
 	        <td>
 				<input type="text" pattern="#[a-f0-9]{6}" name="mkdo_wf_show_in_search_box_as" id="mkdo_wf_show_in_search_box_as" value="<?php echo $value;?>"/>
