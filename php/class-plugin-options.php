@@ -275,13 +275,6 @@ class Plugin_Options {
 	}
 
 	/**
-	 * Add the options page
-	 */
-	public function add_options_page() {
-		add_submenu_page( 'options-general.php', esc_html__( 'Wayfinder', MKDO_WF_TEXT_DOMAIN ), esc_html__( 'Wayfinder', MKDO_WF_TEXT_DOMAIN ), 'manage_options', 'wayfinder', array( $this, 'render_options_page' ) );
-	}
-
-	/**
 	 * Call back for the post_type selector
 	 */
 	public function render_field_post_types() {
@@ -320,6 +313,14 @@ class Plugin_Options {
 			</ul>
 		</div>
 		<?php
+	}
+
+
+	/**
+	 * Add the options page
+	 */
+	public function add_options_page() {
+		add_submenu_page( 'options-general.php', esc_html__( 'Wayfinder', MKDO_WF_TEXT_DOMAIN ), esc_html__( 'Wayfinder', MKDO_WF_TEXT_DOMAIN ), 'manage_options', 'wayfinder', array( $this, 'render_options_page' ) );
 	}
 
 	/**
