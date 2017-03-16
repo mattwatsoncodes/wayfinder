@@ -59,6 +59,7 @@ class Plugin_Options {
 		register_setting( $settings . '_group', $this->options_prefix . 'enqueue_front_end_assets' );
 		register_setting( $settings . '_group', $this->options_prefix . 'enqueue_back_end_assets' );
 		register_setting( $settings . '_group', $this->options_prefix . 'post_types' );
+		register_setting( $settings . '_group', $this->options_prefix . 'wayfinder_archive_title_prefix' );
 
 		// Add section and fields for Asset Enqueing
 		$section = $this->options_prefix . 'section_search_box';
@@ -78,6 +79,11 @@ class Plugin_Options {
 		$section = $this->options_prefix . 'section_select_post_types';
 		add_settings_section( $section, __( 'Choose Post Types', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_section_select_post_types' ), $settings );
 		add_settings_field( $this->options_prefix . 'field_post_types', __( 'Post Types:', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_field_post_types' ), $settings, $section );
+
+		// Add section for choosing the wayfinder archive prefix
+		$section = $this->options_prefix . 'section_set_wayfinder_archive_title_prefix';
+		add_settings_section( $section, __( 'Archive Page Title Prefix', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_section_set_wayfinder_archive_title_prefix' ), $settings );
+		add_settings_field( $this->options_prefix . 'field_wayfinder_archive_title_prefix', __( 'Title Prefix:', MKDO_WF_TEXT_DOMAIN ), array( $this, 'render_field_wayfinder_archive_title_prefix' ), $settings, $section );
 	}
 
 	/**
@@ -311,6 +317,33 @@ class Plugin_Options {
 				}
 				?>
 			</ul>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Call back for the wayfinder_archive_title_prefix section
+	 */
+	public function render_section_set_wayfinder_archive_title_prefix() {
+		echo '<p>';
+		esc_html_e( 'Select the title that you wish to appear before the term name on the wayfinder results page(s).', MKDO_WF_TEXT_DOMAIN );
+		echo '</p>';
+	}
+
+	// Render the Title Prefix
+	public function render_field_wayfinder_archive_title_prefix() {
+
+		$value = get_option(
+			$this->options_prefix . 'wayfinder_archive_title_prefix',
+			__( 'Wayfinder: ', MKDO_WF_TEXT_DOMAIN )
+		);
+
+		?>
+		<div class="field field-checkbox field-input">
+			<label for="<?php echo $this->options_prefix;?>wayfinder_archive_title_prefix" class="screen-reader-text">
+				<?php esc_html_e( 'Title Prefix:', MKDO_WF_TEXT_DOMAIN );?>
+			</label>
+			<input type="text" id="<?php echo $this->options_prefix;?>wayfinder_archive_title_prefix" name="<?php echo $this->options_prefix;?>wayfinder_archive_title_prefix" value="<?php echo esc_attr( $value );?>" />
 		</div>
 		<?php
 	}

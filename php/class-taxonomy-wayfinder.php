@@ -28,6 +28,7 @@ class Taxonomy_Wayfinder {
 		add_action( 'wayfinder_edit_form_fields', array( $this, 'edit_form_fields' ), 10, 2 );
 		add_action( 'edited_wayfinder', array( $this, 'save_data' ), 10, 2 );
 		add_action( 'created_wayfinder', array( $this, 'save_data' ), 10, 2 );
+		add_filter( 'get_the_archive_title', array( $this, 'get_the_archive_title' ), 10, 1 );
 	}
 
 	/**
@@ -124,5 +125,21 @@ class Taxonomy_Wayfinder {
 	        $value = esc_html( $_POST['mkdo_wf_show_in_search_box_as'] );
 	        update_term_meta( $term_id, 'mkdo_wf_show_in_search_box_as', $value );
 	    }
+	}
+
+	public function get_the_archive_title( $title ) {
+
+	    if ( is_tax( 'wayfinder' ) ) {
+			$title_prefix = get_option(
+				$this->options_prefix . 'wayfinder_archive_title_prefix',
+				__( 'Wayfinder: ', MKDO_WF_TEXT_DOMAIN )
+			);
+			if ( ! empty( $title_prefix ) ) {
+				$title_prefix = $title_prefix . ' ';
+			}
+	        $title = single_cat_title( $title_prefix , false );
+	    }
+
+		return $title;
 	}
 }
