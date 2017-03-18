@@ -1,4 +1,4 @@
-# Wayfinder
+# Wayfinder (Beta)
 
 Wayfinder, Category based WordPress Navigation
 
